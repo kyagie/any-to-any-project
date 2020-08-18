@@ -32,6 +32,8 @@
 <div class="q-mt-lg">
     <q-btn flat :disable="!input || !inputBase || !outputBase" class="full-width" @click="convertNumbers" color="white"  text-color="black" label="Convert" />
 
+    <span v-show="!result.length">Hint: Each unit in the input number should be less than or equal the input base ..
+</span>
 </div>
 <div v-show="false">
   <input type="text" v-model="result">
@@ -73,8 +75,25 @@ export default {
       convertNumbers(){
                 this.$q.loading.show()
         setTimeout(() => {
-          this.result = Convert(this.input, this.inputBase, this.outputBase )
+          try {
+             this.result = Convert(this.input, this.inputBase, this.outputBase ) 
                 this.$q.loading.hide()
+          } catch (error) {
+        console.log(error)
+
+                 this.$q.dialog({
+        title: 'Error',
+        message: 'You have an error.'
+      }).onOk(() => {
+        // console.log('OK')
+      })
+                this.$q.loading.hide()
+                  this.input= '',
+      this.inputBase= '',
+      this.outputBase= ''
+
+          }
+         
         }, 1500);
         // console.log(this.result) 
       },
