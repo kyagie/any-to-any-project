@@ -30,20 +30,33 @@
     />
 </div>
 <div class="q-mt-lg">
-    <q-btn class="full-width" @click="convertNumbers" color="white"  text-color="black" label="Convert" />
+    <q-btn flat :disable="!input || !inputBase || !outputBase" class="full-width" @click="convertNumbers" color="white"  text-color="black" label="Convert" />
 
 </div>
+<div v-show="false">
+  <input type="text" v-model="result">
+ 
+</div>
+
 <div class="bbx" v-show="result.length">
   <!-- <h5>The Result is {{ result }}</h5> -->
-  <h6 class="bb">Your Result is:</h6>
+  <h6 class="bb">Your Conversion from Base {{ inputBase }} to {{ outputBase }} is</h6>
   <br>
-  <h6 class="bby">****** {{ result }} ******</h6>
+  <h6 class="bby"> {{ result }} </h6>
+       <q-btn flat type="button"
+      v-clipboard:copy="result"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError">Copy To clipboard!</q-btn>
 </div>
 </div>
   </q-page>
 </template>
 
 <script>
+import Vue from 'vue'
+import VueClipboard from 'vue-clipboard2'
+ 
+Vue.use(VueClipboard)
 
 const { Convert } = require ('any-to-any');
 export default {
@@ -58,9 +71,25 @@ export default {
   },
     methods: {
       convertNumbers(){
-        this.result = Convert(this.input, this.inputBase, this.outputBase )
+                this.$q.loading.show()
+        setTimeout(() => {
+          this.result = Convert(this.input, this.inputBase, this.outputBase )
+                this.$q.loading.hide()
+        }, 1500);
         // console.log(this.result) 
-      }
+      },
+      onCopy: function (e) {
+        this.$q.notify({
+        message: 'Copied to clipboard.',
+        color: 'green'
+      })
+    },
+    onError: function (e) {
+           this.$q.notify({
+        message: 'Could not copy.',
+        color: 'red'
+      })
+    }
       
     }
 }
@@ -73,13 +102,14 @@ font-family: 'Alata', sans-serif;
 }
 .bb{
   /* border: 1px solid red; */
-  margin: 0;
+  margin: 25px 0 1px;
 }
 .bby{
   /* border: 1px solid red; */
-  margin: 0;
+  margin: 14px 0;
 }
 .dd{
+  font-size: 25px;
   text-decoration: underline;
 }
 
