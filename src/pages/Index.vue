@@ -42,7 +42,7 @@
 
 <div class="bbx" v-show="result.length">
   <!-- <h5>The Result is {{ result }}</h5> -->
-  <h6 class="bb">Your Conversion from Base {{ inputBase }} to {{ outputBase }} is</h6>
+  <h6 class="bb">Conversion from Base {{ inputBase }} to {{ outputBase }} is</h6>
   <br>
   <h6 class="bby"> {{ result }} </h6>
        <q-btn flat type="button"
