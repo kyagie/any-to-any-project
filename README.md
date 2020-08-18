@@ -1,6 +1,6 @@
 # A2App (any-to-any) 
 
-Converts numbers between bases
+Converts numbers between any bases
 
 ## Install the dependencies
 ```bash
