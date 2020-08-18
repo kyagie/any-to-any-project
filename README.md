@@ -1,4 +1,4 @@
-# A2App (any-to-any-project)
+# A2App (any-to-any)
 
 Converts numbers between bases
 
