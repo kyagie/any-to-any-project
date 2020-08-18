@@ -1,4 +1,4 @@
-# A2App (any-to-any) Quasar PWA
+# A2App (any-to-any) 
 
 Converts numbers between bases
 
