@@ -164,6 +164,10 @@ cfg.module.rules.push({
       hideSplashscreen: true
     },
 
+    bin: {
+      linuxAndroidStudio: "/home/arthur/bin/android-studio/bin/studio.sh"
+    },
+
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
     electron: {
       bundler: 'packager', // 'packager' or 'builder'
